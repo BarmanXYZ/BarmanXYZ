@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>KINSHUK BARMAN</title>
+    <style>
+        /* --- GLOBAL RESETS & TYPOGRAPHY --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            width: 100%;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            width: 100%;
+            padding: 14px 24px;
+            border-bottom: 2px solid #000000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .brand-title {
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-btn {
+            background: linear-gradient(to bottom, #ffffe0, #f0e68c);
+            border: 1px solid #000000;
+            padding: 6px 14px;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+            touch-action: manipulation;
+        }
+
+        .header-btn-email {
+            background: linear-gradient(to bottom, #e6f2ff, #66b2ff);
+        }
+
+        .header-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* --- CUSTOM X PROFILE BUTTON STYLING --- */
+        .x-header-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #000000;
+            background: #ffffff;
+            padding: 3px 8px;
+            cursor: pointer;
+            text-decoration: none;
+            touch-action: manipulation;
+            height: 29px;
+        }
+
+        .x-header-btn:active {
+            transform: translateY(1px);
+        }
+
+        .x-icon-img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* --- MAIN HOMEPAGE CONTENT (BODY IMAGE DISPLAY) --- */
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .body-img-container {
+            max-width: 950px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .body-img-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border: none;
+            outline: none;
+        }
+
+        /* --- FOOTER STYLING --- */
+        footer {
+            width: 100%;
+            border-top: 3px double #000000;
+            padding: 16px 20px 20px 20px;
+            text-align: center;
+            background-color: #ffffff;
+            margin-top: auto;
+        }
+
+        .footer-copyright {
+            font-size: 14px;
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 8px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: #00a859;
+            text-decoration: underline;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: #007a40;
+        }
+
+        /* --- DISCLAIMER MODAL OVERLAY --- */
+        #disclaimerModalOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.98);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+            backdrop-filter: blur(4px);
+        }
+
+        .popup-outer-frame {
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            padding: 16px;
+            width: 100%;
+            max-width: 780px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .popup-inner-frame {
+            border: 1px solid #000000;
+            background-color: #ffffff;
+            padding: 20px;
+            height: 380px;
+            overflow-y: auto;
+            margin-bottom: 16px;
+        }
+
+        /* --- B&W GRAPHIC SCROLLBAR FOR DISCLAIMER & POPUPS --- */
+        .popup-inner-frame::-webkit-scrollbar,
+        .info-modal-body::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        .popup-inner-frame::-webkit-scrollbar-track,
+        .info-modal-body::-webkit-scrollbar-track {
+            background: #ffffff;
+            border-left: 1px solid #000000;
+        }
+
+        .popup-inner-frame::-webkit-scrollbar-thumb,
+        .info-modal-body::-webkit-scrollbar-thumb {
+            background-color: #000000;
+            border: 2px solid #ffffff;
+        }
+
+        .popup-inner-frame, .info-modal-body {
+            scrollbar-width: thin;
+            scrollbar-color: #000000 #ffffff;
+        }
+
+        .disclaimer-heading {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+        }
+
+        .disclaimer-text {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #111111;
+            text-align: justify;
+        }
+
+        .disclaimer-text p {
+            margin-bottom: 12px;
+        }
+
+        .popup-actions-row {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        /* Gradient Action Buttons */
+        .btn-agree {
+            background: linear-gradient(180deg, #d4f8d4 0%, #a2e8a2 50%, #72d672 100%);
+            border: 1px solid #000000;
+            padding: 8px 18px;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            cursor: pointer;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+            touch-action: manipulation;
+        }
+
+        .btn-disagree {
+            background: linear-gradient(180deg, #ffd4d4 0%, #f8a2a2 50%, #ef7272 100%);
+            border: 1px solid #000000;
+            padding: 8px 18px;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            cursor: pointer;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+            touch-action: manipulation;
+        }
+
+        .btn-agree:active, .btn-disagree:active {
+            transform: scale(0.98);
+        }
+
+        /* --- FACE ANIMATION MODALS (AGREE / DISAGREE / COOKIES) --- */
+        .face-response-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.98);
+            z-index: 10000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .face-svg {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 14px;
+        }
+
+        /* 100% Matching 3D Blue Tick SVG Animation */
+        .blue-tick-svg {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 12px;
+            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .animate-blue-tick {
+            animation: popCheck 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, bounceCheck 1.2s ease-in-out infinite alternate;
+        }
+
+        @keyframes popCheck {
+            0% { transform: scale(0.2) rotate(-10deg); opacity: 0; }
+            80% { transform: scale(1.15) rotate(3deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        @keyframes bounceCheck {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-6px); }
+        }
+
+        .animate-green-face {
+            animation: popSmile 0.5s ease-out forwards, bounceHead 1.2s ease-in-out infinite alternate;
+        }
+
+        @keyframes popSmile {
+            0% { transform: scale(0.3); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes bounceHead {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-8px); }
+        }
+
+        .animate-red-face {
+            animation: popFrown 0.4s ease-out forwards, shakeHead 0.5s ease-in-out infinite;
+        }
+
+        @keyframes popFrown {
+            0% { transform: scale(0.3); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes shakeHead {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px) rotate(-3deg); }
+            75% { transform: translateX(6px) rotate(3deg); }
+        }
+
+        .face-status-text {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        /* --- COOKIES POPUP MODAL --- */
+        #cookiesModalOverlay {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9995;
+            max-width: 360px;
+            width: calc(100% - 40px);
+        }
+
+        .cookies-outer-frame {
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            padding: 18px;
+            box-shadow: 3px 3px 12px rgba(0,0,0,0.2);
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .cookies-title {
+            font-size: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Cookie Graphic + Glow Effect */
+        .cookie-animation-container {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 6px auto 14px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cookie-glow {
+            position: absolute;
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 180, 50, 0.85) 0%, rgba(255, 215, 0, 0.4) 55%, rgba(255,255,255,0) 75%);
+            animation: cookieGlowPulse 1.8s ease-in-out infinite alternate;
+            filter: blur(8px);
+        }
+
+        @keyframes cookieGlowPulse {
+            0% { transform: scale(0.85); opacity: 0.6; }
+            100% { transform: scale(1.3); opacity: 1; filter: blur(12px); }
+        }
+
+        .animated-cookie-svg {
+            width: 70px;
+            height: 70px;
+            z-index: 2;
+            animation: cookieFloat 2.8s ease-in-out infinite alternate, cookieRotate 16s linear infinite;
+        }
+
+        @keyframes cookieFloat {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-6px); }
+        }
+
+        @keyframes cookieRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .cookies-text {
+            font-size: 12px;
+            line-height: 1.5;
+            color: #222222;
+            margin-bottom: 14px;
+        }
+
+        .cookies-actions-grid {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        /* Action Buttons */
+        .cookie-box-btn {
+            flex: 1;
+            padding: 7px 10px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            border: 1px solid #000000;
+            cursor: pointer;
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+            transition: transform 0.1s;
+            touch-action: manipulation;
+            color: #000000;
+        }
+
+        .cookie-btn-accept {
+            background: linear-gradient(180deg, #f3e8ff 0%, #d8b4fe 50%, #a855f7 100%);
+        }
+
+        .cookie-btn-decline {
+            background: linear-gradient(180deg, #ffedd5 0%, #fb923c 50%, #ea580c 100%);
+        }
+
+        .cookie-box-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* --- EMAIL ME POPUP MODAL --- */
+        #emailModalOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 9997;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .email-outer-frame {
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            padding: 12px;
+            width: 100%;
+            max-width: 580px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.15);
+            position: relative;
+        }
+
+        .email-header-strip {
+            border: 1px solid #000000;
+            padding: 6px 10px;
+            font-size: 14px;
+            font-weight: normal;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+        }
+
+        .email-form-grid {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 12px 10px;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .email-label {
+            font-size: 13px;
+            text-align: right;
+            padding-right: 12px;
+        }
+
+        .email-input-short {
+            width: 160px;
+            max-width: 100%;
+            height: 24px;
+            border: 1px solid #000000;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            padding: 2px 6px;
+            outline: none;
+        }
+
+        .email-textarea {
+            width: 100%;
+            height: 130px;
+            border: 1px solid #000000;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            padding: 6px;
+            outline: none;
+            resize: none;
+        }
+
+        .email-rules-row {
+            grid-column: 2;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            margin-top: 4px;
+            position: relative;
+        }
+
+        /* --- CRAYON ANIMATED CHECKBOX STYLING --- */
+        .crayon-checkbox-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .crayon-checkbox-wrapper input[type="checkbox"] {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            position: absolute;
+        }
+
+        .crayon-box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 18px;
+            height: 18px;
+            border: 1.8px solid #000000;
+            border-radius: 3px 6px 4px 5px / 5px 3px 6px 4px;
+            background-color: #ffffff;
+            transition: all 0.2s ease;
+            box-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+        }
+
+        .crayon-checkbox-wrapper:hover .crayon-box {
+            transform: scale(1.08) rotate(-2deg);
+        }
+
+        .crayon-checkmark-svg {
+            position: absolute;
+            top: -5px;
+            left: -2px;
+            width: 24px;
+            height: 24px;
+            pointer-events: none;
+            opacity: 0;
+            transform: scale(0.2) rotate(-15deg);
+            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.15s ease;
+        }
+
+        .crayon-checkbox-wrapper input[type="checkbox"]:checked ~ .crayon-checkmark-svg {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
+        .crayon-checkbox-wrapper input[type="checkbox"]:checked ~ .crayon-box {
+            border-color: #000000;
+            background-color: #f6fff6;
+        }
+
+        /* --- INLINE ANGRY RED FACE WARNING (IN CHECKBOX AREA) --- */
+        .inline-angry-warning {
+            display: none;
+            align-items: center;
+            gap: 6px;
+            position: absolute;
+            left: 175px;
+            top: -8px;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            padding: 3px 8px;
+            box-shadow: 2px 2px 0px #000000;
+            z-index: 10;
+        }
+
+        .inline-angry-svg {
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
+            animation: shakeInlineFace 0.35s ease-in-out infinite alternate;
+        }
+
+        @keyframes shakeInlineFace {
+            0% { transform: rotate(-8deg) scale(1); }
+            100% { transform: rotate(8deg) scale(1.1); }
+        }
+
+        .inline-angry-text {
+            font-size: 11px;
+            font-weight: bold;
+            color: #b30000;
+            white-space: nowrap;
+        }
+
+        .animate-box-shake {
+            animation: boxShake 0.4s ease-in-out;
+        }
+
+        @keyframes boxShake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-6px); }
+            40% { transform: translateX(6px); }
+            60% { transform: translateX(-4px); }
+            80% { transform: translateX(4px); }
+        }
+
+        .email-actions-row {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+            padding-right: 10px;
+        }
+
+        .btn-email-send {
+            background: linear-gradient(180deg, #e6f2ff 0%, #b3d8ff 50%, #80beff 100%);
+            border: 1px solid #000000;
+            padding: 4px 14px;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+
+        .btn-email-discard {
+            background: linear-gradient(180deg, #ffd4d4 0%, #f8a2a2 50%, #ef7272 100%);
+            border: 1px solid #000000;
+            padding: 4px 14px;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+
+        /* --- LOGIN & SIGNUP MODAL OVERLAY --- */
+        #loginModalOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 9998;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .auth-container {
+            width: 380px;
+            max-width: 100%;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            padding: 35px 25px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.15);
+            position: relative;
+        }
+
+        .close-modal-btn {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 4px;
+            line-height: 1;
+            z-index: 5;
+        }
+
+        .auth-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .auth-table td {
+            font-size: 14px;
+            vertical-align: middle;
+            padding: 6px 0;
+        }
+
+        .label { width: 85px; }
+        .colon { width: 12px; text-align: center; }
+        .input-cell { text-align: left; padding-left: 6px; }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            max-width: 160px;
+            height: 24px;
+            border: 1px solid #000000;
+            border-radius: 0;
+            outline: none;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            padding: 2px 6px;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .captcha-box-row td { padding-top: 8px; }
+
+        .captcha-canvas-container {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        canvas.normal-captcha {
+            border: 1px solid #000000;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            vertical-align: middle;
+        }
+
+        .refresh-btn {
+            background: #e6e6e6;
+            border: 1px solid #000000;
+            color: #000000;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 2px 8px;
+            margin-left: 6px;
+            height: 28px;
+            transition: all 0.2s;
+        }
+
+        .refresh-btn:hover { background: #cccccc; }
+
+        .button-row td { padding-top: 18px; }
+        .button-cell { text-align: center; }
+
+        .action-btn {
+            border: 1px solid #000000;
+            border-radius: 0;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            color: #000000;
+            padding: 6px 14px;
+            cursor: pointer;
+            outline: none;
+            margin: 0 3px;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .btn-login { background: linear-gradient(to bottom, #ffffe0, #f0e68c); }
+        .btn-login:active { background: #f0e68c; }
+
+        .btn-signup { background: linear-gradient(to bottom, #e6f2ff, #66b2ff); }
+        .btn-signup:active { background: #4d94ff; }
+
+        .link-btn {
+            background: none;
+            border: none;
+            color: #0284c7;
+            font-weight: normal;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 11px;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        .message-box {
+            margin-top: 12px;
+            font-size: 12px;
+            text-align: center;
+            min-height: 18px;
+            color: #cc0000;
+        }
+
+        #forgot-wrapper { display: none; }
+
+        /* --- FOOTER GENERAL INFORMATION MODALS (TERMS & PRIVACY) --- */
+        .info-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 9996;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .info-modal-frame {
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            padding: 20px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.15);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            max-height: 80vh;
+        }
+
+        .info-modal-title {
+            font-size: 18px;
+            font-weight: bold;
+            border-bottom: 1px solid #000000;
+            padding-bottom: 8px;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+        }
+
+        .info-modal-body {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #222222;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        .info-modal-body h4 {
+            font-size: 14px;
+            margin: 12px 0 4px 0;
+        }
+
+        .info-modal-body p {
+            margin-bottom: 10px;
+        }
+
+        /* --- CUTOFF SCREEN --- */
+        #cutoffScreen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #ffffff;
+            color: #000000;
+            z-index: 99999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* --- MOBILE RESPONSIVE MEDIA QUERIES --- */
+        @media screen and (max-width: 600px) {
+            header { padding: 12px 14px; }
+            .brand-title { font-size: 15px; }
+            .header-btn { padding: 5px 10px; font-size: 11px; }
+
+            main { padding: 20px 10px; }
+
+            #cookiesModalOverlay {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                width: auto;
+                max-width: none;
+            }
+
+            .popup-outer-frame { padding: 10px; }
+            .popup-inner-frame { height: 280px; padding: 12px; }
+            .disclaimer-heading { font-size: 15px; }
+            .disclaimer-text { font-size: 12px; }
+
+            .email-form-grid {
+                grid-template-columns: 80px 1fr;
+                gap: 10px 6px;
+                padding: 0;
+            }
+            .email-label { font-size: 12px; padding-right: 6px; }
+            .email-input-short { width: 100%; }
+
+            .inline-angry-warning {
+                left: 120px;
+                top: -30px;
+            }
+
+            .auth-container { padding: 25px 16px; }
+            .label { width: 75px; font-size: 13px; }
+            input[type="text"], input[type="password"] { max-width: 140px; font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. MAIN WEBSITE HEADER -->
+    <header>
+        <div class="brand-title">KINSHUK BARMAN</div>
+        <div class="header-actions">
+            <button class="header-btn header-btn-email" onclick="openEmailModal()">Email Me</button>
+            
+            <!-- X Profile Button with Custom Image -->
+            <a href="https://x.com/YOUR_USERNAME" target="_blank" rel="noopener noreferrer" class="x-header-btn" title="X">
+                <img src="my-x-logo.png" alt="X" class="x-icon-img">
+            </a>
+
+            <button class="header-btn" onclick="openLoginModal()">Login / Sign Up</button>
+        </div>
+    </header>
+
+    <!-- 2. MAIN WEBSITE BODY -->
+    <main>
+        <div class="body-img-container">
+            <img src="body.png" alt="Body Content Image">
+        </div>
+    </main>
+
+    <!-- 3. FOOTER -->
+    <footer>
+        <div class="footer-copyright">
+            Copyright © 2028 Kinshuk Barman. All Rights Reserved!
+        </div>
+        <div class="footer-links">
+            <button class="footer-link" onclick="openTermsModal()">Terms & Rules!</button>
+            <button class="footer-link" onclick="openPrivacyModal()">Privacy Policy</button>
+            <button class="footer-link" onclick="openEmailModal()">Email me!</button>
+        </div>
+    </footer>
+
+    <!-- 4. DISCLAIMER POPUP MODAL -->
+    <div id="disclaimerModalOverlay">
+        <div class="popup-outer-frame">
+            <div class="popup-inner-frame">
+                <div class="disclaimer-heading">Disclaimer & Undertaking</div>
+                <div class="disclaimer-text">
+                    <p>The rules of the Bar Council of India prohibit law firms and advocates from soliciting work or advertising in any manner. By clicking on <strong>"I Agree :]"</strong> below, the user acknowledges and confirms the following:</p>
+                    <p>1. The user wishes to gain information about Kinshuk Barman for their own information and use.</p>
+                    <p>2. The information provided under this website is available solely at the user's request for informational purposes only and should not be interpreted as soliciting or advertising.</p>
+                    <p>3. Kinshuk Barman is not liable for any consequence of any action taken by the user relying on material or information provided under this website.</p>
+                    <p>4. In cases where the user has any legal issues, they must seek independent legal advice.</p>
+                </div>
+            </div>
+            
+            <div class="popup-actions-row">
+                <button type="button" class="btn-agree" onclick="handleAgree()">I Agree :]</button>
+                <button type="button" class="btn-disagree" onclick="handleDisagree()">I Disagree :[</button>
+            </div>
+
+            <!-- Face Response Overlays inside Disclaimer Box -->
+            <div id="agreeFaceOverlay" class="face-response-overlay">
+                <svg class="face-svg animate-green-face" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="45" fill="#32D74B" stroke="#000000" stroke-width="4"/>
+                    <path d="M 28 32 Q 36 24 44 32" stroke="#000000" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                    <path d="M 56 32 Q 64 24 72 32" stroke="#000000" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                    <circle cx="36" cy="42" r="5" fill="#000000"/>
+                    <circle cx="64" cy="42" r="5" fill="#000000"/>
+                    <path d="M 28 58 Q 50 82 72 58" stroke="#000000" stroke-width="4" fill="none" stroke-linecap="round"/>
+                </svg>
+                <div class="face-status-text" style="color: #1e7e34;">Access Granted</div>
+            </div>
+
+            <div id="disagreeFaceOverlay" class="face-response-overlay">
+                <svg class="face-svg animate-red-face" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="45" fill="#FF453A" stroke="#000000" stroke-width="4"/>
+                    <path d="M 26 28 L 44 36" stroke="#000000" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                    <path d="M 74 28 L 56 36" stroke="#000000" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                    <circle cx="35" cy="44" r="5" fill="#000000"/>
+                    <circle cx="65" cy="44" r="5" fill="#000000"/>
+                    <path d="M 30 70 Q 50 52 70 70" stroke="#000000" stroke-width="4" fill="none" stroke-linecap="round"/>
+                </svg>
+                <div class="face-status-text" style="color: #b30000;">Access Denied</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. ANIMATED COOKIES POPUP MODAL -->
+    <div id="cookiesModalOverlay">
+        <div class="cookies-outer-frame">
+            <button class="close-modal-btn" onclick="closeCookiesModal()" title="Close">✕</button>
+            <div class="cookies-title">Cookie Preferences</div>
+
+            <!-- Animated Cookie Graphic with Glow Effect -->
+            <div class="cookie-animation-container">
+                <div class="cookie-glow"></div>
+                <svg class="animated-cookie-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Cookie Outer Shape -->
+                    <circle cx="50" cy="50" r="42" fill="#d99b4e" stroke="#000000" stroke-width="3.5"/>
+                    <!-- Cookie Texture Dots -->
+                    <circle cx="28" cy="30" r="2" fill="#ba7a32"/>
+                    <circle cx="70" cy="52" r="2" fill="#ba7a32"/>
+                    <circle cx="48" cy="74" r="2" fill="#ba7a32"/>
+                    <!-- Chocolate Chips -->
+                    <circle cx="34" cy="36" r="5.5" fill="#3b1d0e" stroke="#000000" stroke-width="1"/>
+                    <circle cx="64" cy="34" r="6" fill="#3b1d0e" stroke="#000000" stroke-width="1"/>
+                    <circle cx="50" cy="54" r="6.5" fill="#3b1d0e" stroke="#000000" stroke-width="1"/>
+                    <circle cx="28" cy="62" r="5" fill="#3b1d0e" stroke="#000000" stroke-width="1"/>
+                    <circle cx="68" cy="66" r="5.5" fill="#3b1d0e" stroke="#000000" stroke-width="1"/>
+                    <circle cx="52" cy="28" r="4" fill="#3b1d0e" stroke="#000000" stroke-width="1"/>
+                </svg>
+            </div>
+
+            <div class="cookies-text">
+                We use cookies to improve experience and analyze website performance.
+            </div>
+
+            <!-- Two Small Action Boxes -->
+            <div class="cookies-actions-grid">
+                <button type="button" class="cookie-box-btn cookie-btn-accept" onclick="handleAcceptCookies()">Accept</button>
+                <button type="button" class="cookie-box-btn cookie-btn-decline" onclick="handleDeclineCookies()">Decline</button>
+            </div>
+
+            <!-- 100% Matching 3D Blue Tick Overlay on Cookie Accept -->
+            <div id="cookieAcceptTickOverlay" class="face-response-overlay">
+                <svg class="blue-tick-svg animate-blue-tick" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- 3D Solid Offset Shadow (Black) -->
+                    <path d="M 12 45 L 24 33 L 42 58 L 78 10 L 90 22 L 42 85 Z" fill="#000000" transform="translate(6, 6)"/>
+                    <!-- Main Blue Tick Body -->
+                    <path d="M 12 45 L 24 33 L 42 58 L 78 10 L 90 22 L 42 85 Z" fill="#0066FF" stroke="#000000" stroke-width="3.5" stroke-linejoin="miter"/>
+                </svg>
+                <div class="face-status-text" style="color: #0066FF;">Cookies Accepted!</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. EMAIL ME POPUP MODAL -->
+    <div id="emailModalOverlay" onclick="closeEmailModalOnOutsideClick(event)">
+        <div class="email-outer-frame">
+            <button class="close-modal-btn" onclick="closeEmailModal()" title="Close">✕</button>
+            <div class="email-header-strip">Email Me:</div>
+
+            <div class="email-form-grid">
+                <div class="email-label">Name</div>
+                <div><input type="text" id="emailName" class="email-input-short"></div>
+
+                <div class="email-label">E-mail</div>
+                <div><input type="text" id="emailAddress" class="email-input-short"></div>
+
+                <div class="email-label" style="align-self: start; padding-top: 6px;">Your Text</div>
+                <div><textarea id="emailMessage" class="email-textarea"></textarea></div>
+
+                <div class="email-rules-row" id="emailRulesContainer">
+                    <label class="crayon-checkbox-wrapper">
+                        <input type="checkbox" id="emailTerms" onchange="hideInlineAngryFace()">
+                        <span class="crayon-box"></span>
+                        <svg class="crayon-checkmark-svg" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M 6 16 Q 10 21 13 25 Q 18 14 26 5" stroke="#1b7a2b" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M 6 16 Q 10 21 13 25 Q 18 14 26 5" stroke="#32D74B" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </label>
+
+                    <label for="emailTerms" style="cursor: pointer;">I agree terms and rules!</label>
+
+                    <div id="inlineAngryWarning" class="inline-angry-warning">
+                        <svg class="inline-angry-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="45" fill="#FF3B30" stroke="#000000" stroke-width="5"/>
+                            <path d="M 22 24 L 44 38" stroke="#000000" stroke-width="5" stroke-linecap="round"/>
+                            <path d="M 78 24 L 56 38" stroke="#000000" stroke-width="5" stroke-linecap="round"/>
+                            <circle cx="34" cy="48" r="6" fill="#000000"/>
+                            <circle cx="66" cy="48" r="6" fill="#000000"/>
+                            <path d="M 28 76 Q 50 54 72 76" stroke="#000000" stroke-width="5" fill="none" stroke-linecap="round"/>
+                            <path d="M 15 15 L 25 22 M 85 15 L 75 22" stroke="#FF0000" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                        <span class="inline-angry-text">Check this!</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="email-actions-row">
+                <button type="button" class="btn-email-send" onclick="handleEmailSend()">Send!</button>
+                <button type="button" class="btn-email-discard" onclick="handleEmailDiscard()">Discard</button>
+            </div>
+
+            <div id="emailSendFaceOverlay" class="face-response-overlay">
+                <svg class="face-svg animate-green-face" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="45" fill="#66b2ff" stroke="#000000" stroke-width="4"/>
+                    <path d="M 28 32 Q 36 24 44 32" stroke="#000000" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                    <path d="M 56 32 Q 64 24 72 32" stroke="#000000" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                    <circle cx="36" cy="42" r="5" fill="#000000"/>
+                    <circle cx="64" cy="42" r="5" fill="#000000"/>
+                    <path d="M 28 58 Q 50 82 72 58" stroke="#000000" stroke-width="4" fill="none" stroke-linecap="round"/>
+                </svg>
+                <div class="face-status-text" style="color: #0284c7;">Email Sent Successfully! :]</div>
+            </div>
+
+            <div id="emailDiscardFaceOverlay" class="face-response-overlay">
+                <svg class="face-svg animate-red-face" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="45" fill="#FF453A" stroke="#000000" stroke-width="4"/>
+                    <path d="M 26 28 L 44 36" stroke="#000000" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                    <path d="M 74 28 L 56 36" stroke="#000000" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                    <circle cx="35" cy="44" r="5" fill="#000000"/>
+                    <circle cx="65" cy="44" r="5" fill="#000000"/>
+                    <path d="M 30 70 Q 50 52 70 70" stroke="#000000" stroke-width="4" fill="none" stroke-linecap="round"/>
+                </svg>
+                <div class="face-status-text" style="color: #b30000;">Form Discarded! :[</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. LOGIN & SIGNUP MODAL OVERLAY -->
+    <div id="loginModalOverlay" onclick="closeLoginModalOnOutsideClick(event)">
+        <div class="auth-container">
+            <button class="close-modal-btn" onclick="closeLoginModal()" title="Close">✕</button>
+
+            <div id="form-wrapper">
+                <table class="auth-table">
+                    <tr>
+                        <td class="label">User ID</td>
+                        <td class="colon">:</td>
+                        <td class="input-cell">
+                            <input type="text" id="userIdInput" autocomplete="off" placeholder="User ID">
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="label">Password</td>
+                        <td class="colon">:</td>
+                        <td class="input-cell">
+                            <input type="password" id="passwordInput">
+                        </td>
+                    </tr>
+
+                    <tr class="captcha-box-row">
+                        <td class="label">Code</td>
+                        <td class="colon">:</td>
+                        <td class="input-cell">
+                            <div class="captcha-canvas-container">
+                                <canvas id="captchaCanvas" class="normal-captcha" width="105" height="28" onclick="generateCaptcha()" title="Click to refresh"></canvas>
+                                <button type="button" class="refresh-btn" onclick="generateCaptcha()" title="Refresh Captcha">↻</button>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="label">Captcha</td>
+                        <td class="colon">:</td>
+                        <td class="input-cell">
+                            <input type="text" id="captchaInput" autocomplete="off" placeholder="Enter code">
+                        </td>
+                    </tr>
+                    
+                    <tr class="button-row">
+                        <td colspan="3" class="button-cell">
+                            <button type="button" class="action-btn btn-login" onclick="handleAuthAction('Login')">Login</button>
+                            <button type="button" class="action-btn btn-signup" onclick="handleAuthAction('Sign Up')">Sign Up</button>
+                            <br>
+                            <button type="button" class="link-btn" onclick="toggleForgotView(true)">Forgot Password?</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="forgot-wrapper">
+                <table class="auth-table">
+                    <tr>
+                        <td class="label">User ID</td>
+                        <td class="colon">:</td>
+                        <td class="input-cell">
+                            <input type="text" id="forgotUserIdInput" autocomplete="off" placeholder="User ID">
+                        </td>
+                    </tr>
+
+                    <tr class="captcha-box-row">
+                        <td class="label">Code</td>
+                        <td class="colon">:</td>
+                        <td class="input-cell">
+                            <div class="captcha-canvas-container">
+                                <canvas id="forgotCaptchaCanvas" class="normal-captcha" width="105" height="28" onclick="generateCaptcha()" title="Click to refresh"></canvas>
+                                <button type="button" class="refresh-btn" onclick="generateCaptcha()" title="Refresh Captcha">↻</button>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="label">Captcha</td>
+                        <td class="colon">:</td>
+                        <td class="input-cell">
+                            <input type="text" id="forgotCaptchaInput" autocomplete="off" placeholder="Enter code">
+                        </td>
+                    </tr>
+                    
+                    <tr class="button-row">
+                        <td colspan="3" class="button-cell">
+                            <button type="button" class="action-btn btn-signup" onclick="handleAuthAction('Reset')">Send Reset Link</button>
+                            <button type="button" class="action-btn btn-login" onclick="toggleForgotView(false)">Back</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="messageBox" class="message-box"></div>
+        </div>
+    </div>
+
+    <!-- 8. FOOTER POPUP MODALS -->
+    <div id="termsModalOverlay" class="info-modal-overlay" onclick="closeModalOnOutsideClick(event, 'termsModalOverlay')">
+        <div class="info-modal-frame">
+            <button class="close-modal-btn" onclick="closeTermsModal()" title="Close">✕</button>
+            <div class="info-modal-title">Terms & Rules</div>
+            <div class="info-modal-body">
+                <h4>1. Acceptance of Terms</h4>
+                <p>By accessing and utilizing this legal portal, you agree to comply with all terms, rules, and applicable regulatory directives set forth by Advocates Act and Bar Council regulations.</p>
+                <h4>2. Informational Purpose Only</h4>
+                <p>All materials and information made available on this website are exclusively for generic educational and informational purposes. Nothing on this portal constitutes formal legal advice.</p>
+                <h4>3. User Obligations</h4>
+                <p>Users must provide accurate information when utilizing contact or authentication services and agree not to disrupt or modify any system parameters.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="privacyModalOverlay" class="info-modal-overlay" onclick="closeModalOnOutsideClick(event, 'privacyModalOverlay')">
+        <div class="info-modal-frame">
+            <button class="close-modal-btn" onclick="closePrivacyModal()" title="Close">✕</button>
+            <div class="info-modal-title">Privacy Policy</div>
+            <div class="info-modal-body">
+                <h4>1. Data Protection & Confidentiality</h4>
+                <p>We respect client privacy and ensure that information shared via communication forms is handled in strict confidentiality and processed only for direct inquiry fulfillment.</p>
+                <h4>2. Information Collected</h4>
+                <p>We collect basic details such as name, email address, and inquiry messages provided voluntarily through our communication forms.</p>
+                <h4>3. Non-Disclosure</h4>
+                <p>Your private data is never sold, leased, or distributed to third-party commercial entities under any circumstances.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 9. WEBSITE CUTOFF SCREEN -->
+    <div id="cutoffScreen">
+        <h2 style="font-size: 24px; margin-bottom: 10px;">Website Access Terminated</h2>
+        <p style="font-size: 14px; color: #555555;">You have disagreed with the terms of entrance.</p>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- DISCLAIMER MODAL LOGIC ---
+        function handleAgree() {
+            document.getElementById('agreeFaceOverlay').style.display = 'flex';
+            setTimeout(() => {
+                document.getElementById('disclaimerModalOverlay').style.display = 'none';
+                showCookiesModal();
+            }, 1400);
+        }
+
+        function handleDisagree() {
+            document.getElementById('disagreeFaceOverlay').style.display = 'flex';
+            setTimeout(() => {
+                document.getElementById('disclaimerModalOverlay').style.display = 'none';
+                document.getElementById('cutoffScreen').style.display = 'flex';
+                if (window.history.length > 1) {
+                    window.history.back();
+                } else {
+                    window.location.href = "about:blank";
+                }
+            }, 1400);
+        }
+
+        // --- COOKIES POPUP LOGIC ---
+        function showCookiesModal() {
+            document.getElementById('cookiesModalOverlay').style.display = 'block';
+        }
+
+        function closeCookiesModal() {
+            document.getElementById('cookiesModalOverlay').style.display = 'none';
+            document.getElementById('cookieAcceptTickOverlay').style.display = 'none';
+        }
+
+        function handleAcceptCookies() {
+            document.getElementById('cookieAcceptTickOverlay').style.display = 'flex';
+            setTimeout(() => {
+                closeCookiesModal();
+            }, 1400);
+        }
+
+        function handleDeclineCookies() {
+            closeCookiesModal();
+        }
+
+        // --- EMAIL ME MODAL LOGIC ---
+        function openEmailModal() {
+            document.getElementById('emailModalOverlay').style.display = 'flex';
+            hideInlineAngryFace();
+        }
+
+        function closeEmailModal() {
+            document.getElementById('emailModalOverlay').style.display = 'none';
+            document.getElementById('emailSendFaceOverlay').style.display = 'none';
+            document.getElementById('emailDiscardFaceOverlay').style.display = 'none';
+            hideInlineAngryFace();
+        }
+
+        function closeEmailModalOnOutsideClick(event) {
+            if (event.target.id === 'emailModalOverlay') {
+                closeEmailModal();
+            }
+        }
+
+        function hideInlineAngryFace() {
+            const warning = document.getElementById('inlineAngryWarning');
+            if (warning) {
+                warning.style.display = 'none';
+            }
+        }
+
+        function handleEmailSend() {
+            const terms = document.getElementById('emailTerms').checked;
+            if (!terms) {
+                const warning = document.getElementById('inlineAngryWarning');
+                const container = document.getElementById('emailRulesContainer');
+                
+                warning.style.display = 'flex';
+                container.classList.remove('animate-box-shake');
+                void container.offsetWidth;
+                container.classList.add('animate-box-shake');
+                return;
+            }
+
+            hideInlineAngryFace();
+            document.getElementById('emailSendFaceOverlay').style.display = 'flex';
+            setTimeout(() => {
+                closeEmailModal();
+                document.getElementById('emailName').value = '';
+                document.getElementById('emailAddress').value = '';
+                document.getElementById('emailMessage').value = '';
+                document.getElementById('emailTerms').checked = false;
+            }, 1400);
+        }
+
+        function handleEmailDiscard() {
+            hideInlineAngryFace();
+            document.getElementById('emailDiscardFaceOverlay').style.display = 'flex';
+            setTimeout(() => {
+                closeEmailModal();
+                document.getElementById('emailName').value = '';
+                document.getElementById('emailAddress').value = '';
+                document.getElementById('emailMessage').value = '';
+                document.getElementById('emailTerms').checked = false;
+            }, 1400);
+        }
+
+        // --- AUTH MODAL LOGIC ---
+        function openLoginModal() {
+            document.getElementById('loginModalOverlay').style.display = 'flex';
+            generateCaptcha();
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModalOverlay').style.display = 'none';
+            document.getElementById('messageBox').textContent = '';
+        }
+
+        function closeLoginModalOnOutsideClick(event) {
+            if (event.target.id === 'loginModalOverlay') {
+                closeLoginModal();
+            }
+        }
+
+        // --- TERMS & PRIVACY MODAL LOGIC ---
+        function openTermsModal() {
+            document.getElementById('termsModalOverlay').style.display = 'flex';
+        }
+
+        function closeTermsModal() {
+            document.getElementById('termsModalOverlay').style.display = 'none';
+        }
+
+        function openPrivacyModal() {
+            document.getElementById('privacyModalOverlay').style.display = 'flex';
+        }
+
+        function closePrivacyModal() {
+            document.getElementById('privacyModalOverlay').style.display = 'none';
+        }
+
+        function closeModalOnOutsideClick(event, modalId) {
+            if (event.target.id === modalId) {
+                document.getElementById(modalId).style.display = 'none';
+            }
+        }
+
+        // --- CAPTCHA GENERATOR ---
+        let currentCaptcha = "";
+
+        function drawNormalCaptcha(canvasId, text) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext("2d");
+
+            ctx.fillStyle = "#e8e8e8";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.strokeStyle = "#aaaaaa";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(0, Math.random() * canvas.height);
+            ctx.lineTo(canvas.width, Math.random() * canvas.height);
+            ctx.stroke();
+
+            ctx.font = "bold 15px 'Consolas', monospace";
+            ctx.fillStyle = "#111111";
+            ctx.fillText(text, 12, 19);
+        }
+
+        function generateCaptcha() {
+            const characters = "23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz";
+            let code = "";
+            for (let i = 0; i < 5; i++) {
+                code += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            currentCaptcha = code;
+            drawNormalCaptcha("captchaCanvas", currentCaptcha);
+            drawNormalCaptcha("forgotCaptchaCanvas", currentCaptcha);
+        }
+
+        function toggleForgotView(isForgot) {
+            generateCaptcha();
+            document.getElementById("messageBox").textContent = "";
+            document.getElementById("form-wrapper").style.display = isForgot ? "none" : "block";
+            document.getElementById("forgot-wrapper").style.display = isForgot ? "block" : "none";
+        }
+
+        function handleAuthAction(actionType) {
+            const msgBox = document.getElementById("messageBox");
+            const isForgot = document.getElementById("forgot-wrapper").style.display === "block";
+            const captchaVal = isForgot ? document.getElementById("forgotCaptchaInput").value : document.getElementById("captchaInput").value;
+
+            if (!captchaVal) {
+                msgBox.textContent = "Please enter the captcha code.";
+                return;
+            }
+
+            if (captchaVal.trim().toLowerCase() !== currentCaptcha.toLowerCase()) {
+                msgBox.textContent = "Invalid captcha code! Try again.";
+                generateCaptcha();
+                return;
+            }
+
+            msgBox.style.color = "#008000";
+            msgBox.textContent = `${actionType} request successful!`;
+            setTimeout(() => {
+                closeLoginModal();
+                msgBox.style.color = "#cc0000";
+                msgBox.textContent = "";
+            }, 1200);
+        }
+    </script>
+</body>
+</html>
